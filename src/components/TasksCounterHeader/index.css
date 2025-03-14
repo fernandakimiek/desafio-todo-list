@@ -1,0 +1,29 @@
+.counter-box {
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    width: 46rem;
+  }
+  
+  .tasks-created-counter {
+    color: var(--blue);
+    font-size: 0.875rem;
+    font-weight: bold;
+  }
+  
+  .tasks-completed-counter {
+    color: var(--purple);
+    font-size: 0.875rem;
+    font-weight: bold;
+  }
+  
+  .counter {
+    color: var(--gray-200);
+    background-color: var(--gray-400);
+    font-size: 0.75rem;
+    padding:  2px 8px 2px 8px;
+    border-radius: 1rem;
+    margin-left: 0.4rem;
+  }
+  
