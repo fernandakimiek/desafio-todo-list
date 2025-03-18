@@ -6,8 +6,8 @@ import "./index.css";
 
 interface TaskBoardProps {
   tasks: Task[];
-  onCheckCompleted: (checked: boolean, id: number) => void;
-  onRemoveItem: (id: number) => void;
+  onCheckCompleted: (checked: boolean, id: string) => void;
+  onRemoveItem: (id: string) => void;
 }
 
 export function TasksBoard({

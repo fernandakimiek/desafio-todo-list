@@ -9,20 +9,31 @@ import { TasksBoard } from "./components/TasksBoard";
 import { TasksCounterHeader } from "./components/TasksCounterHeader";
 
 export interface Task {
-  id: number;
+  id: string;
   description: string;
   completed: boolean;
 }
 
 export function App() {
+  const [taskDescription, setTaskDescription] = useState<string>("");
   const [tasks, setTasks] = useState<Task[]>([]);
   const [tasksCompleted, setTasksCompleted] = useState<number>(0);
 
   function handleAddTask() {
-    setTasks([...tasks, { id: 1, description: "Teste", completed: false }]);
+    if (taskDescription) {
+      setTasks([
+        {
+          id: crypto.randomUUID(),
+          description: taskDescription,
+          completed: false,
+        },
+        ...tasks,
+      ]);
+    }
+    setTaskDescription("");
   }
 
-  const handleCheckCheckbox = (checked: boolean, id: number) => {
+  const handleCheckCheckbox = (checked: boolean, id: string) => {
     setTasks(
       tasks.map((item) =>
         item.id === id ? { ...item, completed: !item.completed } : item
@@ -35,7 +46,7 @@ export function App() {
     }
   };
 
-  const handleRemoveItem = (id: number) => {
+  const handleRemoveItem = (id: string) => {
     setTasks(tasks.filter((item) => item.id !== id));
   };
 
@@ -45,8 +56,13 @@ export function App() {
         <img src={TODOListLogo} alt="Logotipo TODO" />
       </header>
       <div className="input-container">
-        <input placeholder="Adicione uma nova tarefa" />
-        <Button onClick={handleAddTask}>
+        <input
+          placeholder="Adicione uma nova tarefa"
+          name="taskDescription"
+          value={taskDescription}
+          onChange={(event) => setTaskDescription(event.target.value)}
+        />
+        <Button onClick={handleAddTask} disabled={!taskDescription}>
           Criar <CirclePlus size={16} style={{ marginLeft: "0.5rem" }} />
         </Button>
       </div>
